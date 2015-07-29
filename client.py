@@ -1,34 +1,22 @@
-import socket   #for sockets
-import sys  #for exit
- 
-# create dgram udp socket
-try:
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-except socket.error:
-    print 'Failed to create socket'
-    sys.exit()
- 
-host = '10.42.0.1';
-port = 8888;
- 
-while(1) :
-    msg = raw_input('Enter message to send : ')
-    if msg=="exit":
-        s.sendto("client exitted", (host, port))
-        break
-     
-    try :
-        #Set the whole string
-        s.sendto(msg, (host, port))
-         
-        # receive data from client (data, addr)
-        d = s.recvfrom(1024)
-        reply = d[0]
-        addr = d[1]
-         
-        print 'Server reply : ' + reply
-     
-    except socket.error, msg:
-        print 'Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
-        sys.exit()
+import socket
 
+IP = "127.0.0.1"
+PORT = 5005
+sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+
+c2s=["initial0",""]
+prevrply="initial1"
+s2c=["",""]
+while True:
+    c2s[1]=raw_input("client: ")
+    sock.sendto(c2s[0],(IP,PORT))
+    sock.sendto(c2s[1],(IP,PORT))
+    s2c[0],servaddr=sock.recvfrom(1024)
+    s2c[1],servaddr=sock.recvfrom(1024)
+    if s2c[0]==prevrply:
+        print 'Server: ',s2c[1]
+        prevrply=s2c[1]
+    else:
+        print 'Server: ',s2c[0] 
+        prevrply=s2c[0]
+    c2s[0]=c2s[1]
