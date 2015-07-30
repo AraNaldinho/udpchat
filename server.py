@@ -19,6 +19,6 @@ while True:
         print 'Client: ',c2s[0] 
         prevrply=c2s[0]
     s2c[1]=raw_input("Server: ")
-    sock.sendto(s2c[0],(IP,PORT))
-    sock.sendto(s2c[1],(IP,PORT))
+    sock.sendto(s2c[0],cliaddr)
+    sock.sendto(s2c[1],cliaddr)
     s2c[0]=s2c[1]
