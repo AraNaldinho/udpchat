@@ -4,8 +4,8 @@ IP = "127.0.0.1"
 PORT = 5005
 sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 
-c2s=["initial0",""]
-prevrply="initial1"
+c2s=["init0",""]
+prevrply="init1"
 s2c=["",""]
 
 while True:
@@ -14,10 +14,10 @@ while True:
     sock.sendto(c2s[1],(IP,PORT))
     s2c[0],servaddr=sock.recvfrom(1024)
     s2c[1],servaddr=sock.recvfrom(1024)
-    if not s2c[0]==prevrply:
-        print 'Server: ',s2c[1]
+    if s2c[0]==prevrply:
+        print 'Server:',s2c[1]
         prevrply=s2c[1]
     else:
-        print 'Server: ',s2c[0] 
+        print 'Server:',s2c[0] 
         prevrply=s2c[0]
     c2s[0]=c2s[1]
