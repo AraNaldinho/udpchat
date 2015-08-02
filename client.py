@@ -9,4 +9,6 @@ while True:
 	sock.sendto(msg,(IP,PORT))
 	
 	meaning = sock.recvfrom(1024)
-	print "server reply :" + meaning
+	meaning_word=meaning[0]
+	meaning_addr=meaning[1]
+	print "server reply :" + meaning_word
