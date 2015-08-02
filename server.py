@@ -2,7 +2,7 @@ import socket
 import time
 
 IP = ""
-PORT = 5005
+PORT = 5002
 sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 sock.bind((IP,PORT))
 
