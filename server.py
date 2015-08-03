@@ -1,24 +1,18 @@
 import socket
+import time
 
 IP = ""
-PORT = 5005
+PORT = 5002
 sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 sock.bind((IP,PORT))
 
-s2c=["init1",""]
-prevrply="init0"
-c2s=["",""]
+ram_meaning = "cute"
+sam_meaning = "mass"
 
 while True:
-    c2s[0],cliaddr = sock.recvfrom(1024)
-    c2s[1],cliaddr = sock.recvfrom(1024)
-    if c2s[0]==prevrply:
-        print 'Client:',c2s[1]
-        prevrply=c2s[1]
-    else:
-        print 'Client:',c2s[0] 
-        prevrply=c2s[0]
-    s2c[1]=raw_input("Server: ")
-    sock.sendto(s2c[0],cliaddr)
-    sock.sendto(s2c[1],cliaddr)
-    s2c[0]=s2c[1]
+    word , cliaddr = sock.recvfrom(1024)
+    time.sleep(5)
+    if(word == "ram"):
+        sock.sendto(ram_meaning,cliaddr)
+    elif(word == "sam"):
+        sock.sendto(sam_meaning,cliaddr)

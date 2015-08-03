@@ -1,23 +1,21 @@
 import socket
+import time
 
 IP = "127.0.0.1"
-PORT = 5005
+PORT = 5002
 sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-
-c2s=["init0",""]
-prevrply="init1"
-s2c=["",""]
+sock.setblocking(0)
+meaning_word = "null"
 
 while True:
-    c2s[1]=raw_input("client: ")
-    sock.sendto(c2s[0],(IP,PORT))
-    sock.sendto(c2s[1],(IP,PORT))
-    s2c[0],servaddr=sock.recvfrom(1024)
-    s2c[1],servaddr=sock.recvfrom(1024)
-    if s2c[0]==prevrply:
-        print 'Server:',s2c[1]
-        prevrply=s2c[1]
-    else:
-        print 'Server:',s2c[0] 
-        prevrply=s2c[0]
-    c2s[0]=c2s[1]
+    msg = raw_input("enter the word :")
+    while(meaning_word == "null"):
+        sock.sendto(msg,(IP,PORT))
+        time.sleep(3)
+        try:
+            meaning = sock.recvfrom(1024)
+            meaning_word=meaning[0]
+            meaning_addr=meaning[1]
+            print "server reply :" + meaning_word
+        except: 
+                print "retransmit"
