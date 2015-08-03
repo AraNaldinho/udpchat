@@ -4,18 +4,16 @@ import time
 IP = "127.0.0.1"
 PORT = 5002
 sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-sock.setblocking(0)
-meaning_word = "null"
+sock.setblocking(False)
 
 while True:
-    msg = raw_input("enter the word :")
-    while(meaning_word == "null"):
-        sock.sendto(msg,(IP,PORT))
-        time.sleep(3)
+    domain_name = raw_input("Enter the domain name: ")
+    site_ip = None
+    while(site_ip == None):
+        sock.sendto(domain_name,(IP,PORT))
+        time.sleep(2)
         try:
-            meaning = sock.recvfrom(1024)
-            meaning_word=meaning[0]
-            meaning_addr=meaning[1]
-            print "server reply :" + meaning_word
+            site_ip, server_address = sock.recvfrom(1024)
+            print "Corresponding IP:",site_ip
         except: 
-                print "retransmit"
+                print "Retransmitting"
