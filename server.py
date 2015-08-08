@@ -23,7 +23,5 @@ while True:
     time.sleep(3)
     if iplookup.has_key(domain_name):
         sock.sendto(iplookup[domain_name],client_address)
-    elif domain_name == "dummy_request":
-        continue
     else:
         sock.sendto("Sorry. Not available.",client_address)
