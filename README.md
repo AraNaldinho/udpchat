@@ -1,13 +1,19 @@
-# udpchat
-Simple UDP connection establishment in Python 2.x
+# UDP Socket Communication
+Simple UDP socket communication establishment in Python2
 
 
-###New addition
+###Version Details
+v3 <br/>
+*Plus*: Doesn't anymore work for only one loss. Instead won't allow next request until the previous request receives the response. Definitely better alternative than previous version.
 <br/>
-+ Added basic level reliability:
+*Minus*: Not exactly "time-out and hence resend request". Because doesn't wait for any "particular duration" of user-choice before resending request.
 <br/>
-Sender sends both current msg and previous msg to check if previous msg was lost and display the apt msg.
 <br/>
-- Drawback:
+v2 <br/>
+*Plus*: ~~Sender sends both current msg and previous msg to check if previous msg was lost and display the apt msg.~~
 <br/>
-Works only for one loss. Could be problematic if same msg sent more than once continuosly.
+*Minus*: ~~Works only for one loss. Could be problematic if same msg sent more than once continuosly.~~
+<br/>
+<br/>
+v1 <br/>
+Simple send and receive ~~(no reliability).~~
